@@ -1,15 +1,8 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 
-const ShowMoreButton = ({ handleShowMore, isDisabled }) => {
-  const router = useRouter();
-  const handleClickShowMore = async () => {
-    await handleShowMore();
-    router.refresh();
-  };
-
+const ShowMoreButton = ({ handleClickShowMore, isDisabled }) => {
   return (
     <div className="col-12 hlp-text-center hlp-margintop-40">
       <button
@@ -24,7 +17,7 @@ const ShowMoreButton = ({ handleShowMore, isDisabled }) => {
 };
 
 ShowMoreButton.propTypes = {
-  handleShowMore: PropTypes.func.isRequired,
+  handleClickShowMore: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
 };
 
