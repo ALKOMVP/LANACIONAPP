@@ -4,10 +4,10 @@ import ArticleCard from "./ArticleCard";
 import PropTypes from "prop-types";
 
 const ArticlesList = ({ articles, itemsToShow }) => {
-  let articlesToShow = articles.slice(0, itemsToShow - 1);
+  articles = articles.slice(0, itemsToShow);
   return (
     <>
-      {articlesToShow.map((article) => (
+      {articles.map((article) => (
         <ArticleCard key={article._id} article={article} />
       ))}
     </>

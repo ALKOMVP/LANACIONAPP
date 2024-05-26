@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
+import { AppWrapper } from "@/context";
 import AsideBanner from "./components/ui/AsideBanner";
 import "./globals.css";
 
-import { AppWrapper } from "@/context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
         <main>
           <div className="lay-sidebar">
             <div className="sidebar__main">
-              <AppWrapper>{children}</AppWrapper>
+              <AppWrapper>
+                {children}
+              </AppWrapper>
             </div>
             <AsideBanner title="Recetas más leídas" />
           </div>

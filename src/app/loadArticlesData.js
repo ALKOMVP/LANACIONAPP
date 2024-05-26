@@ -1,10 +1,9 @@
 import { fetchArticles } from "../api/apiClient";
 import { formatDate } from "../utils/index";
+import { SUBTYPE_ARTICLES_INDEX } from "@/constants";
 
-const SUBTYPE_ARTICLES_INDEX = "7";
 let firstTimeLoad = true;
 let articlesData = [];
-
 async function getArticles() {
   try {
     const res = await fetchArticles(SUBTYPE_ARTICLES_INDEX);
@@ -14,12 +13,11 @@ async function getArticles() {
   }
 }
 
-export default async function loadArticlesData() {
+export default async function loadArticlesData(page) {
   articlesData = firstTimeLoad ? await getArticles() : articlesData;
   firstTimeLoad = false;
   let articles = [];
   let tags = [];
-
   const buildInitialData = (articlesData) => {
     articles = articlesData;
     const tagMap = new Map();

@@ -3,7 +3,6 @@ import { render, fireEvent } from "@testing-library/react";
 import ShowMoreSection from "./ShowMoreSection";
 import { useAppContext } from "@/context";
 import { useRouter } from "next/navigation";
-import { ITEMS_PER_PAGE } from "@/constants";
 
 // Mock the context and router
 jest.mock("@/context", () => ({
@@ -15,14 +14,13 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("ShowMoreSection", () => {
-  const handleShowMore = jest.fn();
   const setPage = jest.fn();
-  const refresh = jest.fn();
+  const push = jest.fn();
   const page = 1;
 
   beforeEach(() => {
     useAppContext.mockReturnValue({ page, setPage });
-    useRouter.mockReturnValue({ refresh });
+    useRouter.mockReturnValue({ push });
   });
 
   afterEach(() => {
@@ -31,29 +29,28 @@ describe("ShowMoreSection", () => {
 
   it("renders the ShowMoreButton", () => {
     const { getByRole } = render(
-      <ShowMoreSection handleShowMore={handleShowMore} isDisabled={false} />
+      <ShowMoreSection isDisabled={false} />
     );
 
     const button = getByRole("button");
     expect(button).toBeInTheDocument();
   });
 
-  it("calls handleShowMore and updates page on button click", () => {
+  it("updates page and router push on button click", () => {
     const { getByRole } = render(
-      <ShowMoreSection handleShowMore={handleShowMore} isDisabled={false} />
+      <ShowMoreSection isDisabled={false} />
     );
 
     const button = getByRole("button");
     fireEvent.click(button);
 
-    expect(handleShowMore).toHaveBeenCalledWith((page + 1) * ITEMS_PER_PAGE);
     expect(setPage).toHaveBeenCalledWith(page + 1);
-    expect(refresh).toHaveBeenCalled();
+    expect(push).toHaveBeenCalledWith("/?page=2", { scroll: false });
   });
 
   it("disables the button when isDisabled is true", () => {
     const { getByRole } = render(
-      <ShowMoreSection handleShowMore={handleShowMore} isDisabled={true} />
+      <ShowMoreSection isDisabled={true} />
     );
 
     const button = getByRole("button");

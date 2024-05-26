@@ -24,7 +24,6 @@ export const fetchArticles = async (subtype) => {
     const {
       data: { articles },
     } = await apiClient.get("/");
-
     return articles.filter((article) => article.subtype === subtype);
   } catch (error) {
     console.error("Error fetching articles:", error);
