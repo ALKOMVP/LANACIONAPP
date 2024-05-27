@@ -15,7 +15,6 @@ async function getArticles() {
 
 export default async function loadArticlesData() {
   articlesData = firstTimeLoad ? await getArticles() : articlesData;
-  firstTimeLoad = false;
   let articles = [];
   let tags = [];
   const buildInitialData = (articlesData) => {
@@ -43,6 +42,6 @@ export default async function loadArticlesData() {
   };
 
   buildInitialData(articlesData);
-
+  firstTimeLoad = false;
   return { articles, tags };
 }
