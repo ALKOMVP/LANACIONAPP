@@ -13,7 +13,7 @@ async function getArticles() {
   }
 }
 
-export default async function loadArticlesData(page) {
+export default async function loadArticlesData() {
   articlesData = firstTimeLoad ? await getArticles() : articlesData;
   firstTimeLoad = false;
   let articles = [];
