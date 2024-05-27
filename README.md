@@ -13,7 +13,7 @@ Installation with npm v10.5,0
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## testing
+## Testing
 
 ```bash
   npm run test
